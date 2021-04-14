@@ -4,7 +4,7 @@ import Input from '../../shared/components/FormElements/Input/Input';
 import Button from '../../shared/components/FormElements/Button/Button';
 import { VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '../../shared/util/validators'; 
 
-import './NewPlace.css';
+import './PlaceForm.css';
 
 const formReducer = (state, action) => {
     switch(action.type){
@@ -37,6 +37,10 @@ const NewPlace = () => {
                 isValid: false
             },
             description: {
+                value: '',
+                isValid: false
+            },
+            address: {
                 value: '',
                 isValid: false
             }
@@ -72,7 +76,6 @@ const NewPlace = () => {
             <Input
                 id="description"
                 element="textarea" 
-                type="text" 
                 label="Description" 
                 errorText="Please enter description with minimum 5 characters."
                 validators={[ VALIDATOR_MINLENGTH(5) ]}
