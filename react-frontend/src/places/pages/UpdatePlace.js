@@ -38,7 +38,6 @@ const DUMMY_PLACES = [
 const UpdatePlace = () => {
     const placeId = useParams().placeId;
     const placeFound = DUMMY_PLACES.find(p=> p.id === placeId);
-    console.log(placeFound);
     
     const [ formState, inputHandler ] = useForm({
         title: {
@@ -63,7 +62,6 @@ const UpdatePlace = () => {
         console.log(formState);
     }
 
-    console.log(formState);
     return (
         <form className="place-form" onSubmit={updateFormSubmitHandler}>
             <Input
