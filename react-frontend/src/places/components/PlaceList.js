@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Card from '../../shared/components/UIElements/Card/Card';
+import Button from '../../shared/components/FormElements/Button/Button';
 import PlaceItem from './PlaceItem';
 
 import './PlaceList.css';
@@ -9,8 +10,10 @@ const PlaceList = props => {
     if(props.items.length === 0){
         return (
             <div className="place-list center">
-                <Card >No Place Found. Want to create a place?</Card>
-                <button type="submit">Create Place</button>
+                <Card >
+                    <h2>No Place Found. Want to share a place?</h2>
+                    <Button to="/places/new">Share Place</Button>
+                </Card>
             </div>
         );
     }

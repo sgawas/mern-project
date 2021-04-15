@@ -19,6 +19,12 @@ const formReducer = (state, action) => {
                 },
                 isValid: formIsValid
             };
+        // replace existing form data with new data hence we did not copy data ...state
+        case 'SET_DATA': return {
+            inputs: action.inputs,
+            isValid: formReducer.formIsValid
+        };
+
         default: return state;
     }
 };
@@ -39,5 +45,13 @@ export const useForm = (initialInputs, formValidity) => {
         });
     },[]);
 
-    return [ formState, inputHandler ];
+    const setFormData = useCallback((inputsData, formValidity)=> {
+        dispatch({
+            type: 'SET_DATA',
+            inputs: inputsData,
+            formIsValid: formValidity
+        });
+    },[]);
+
+    return [ formState, inputHandler, setFormData ];
 }

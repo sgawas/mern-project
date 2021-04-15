@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Input from '../../shared/components/FormElements/Input/Input';
 import Button from '../../shared/components/FormElements/Button/Button';
+import Card from '../../shared/components/UIElements/Card/Card';
 import { VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '../../shared/util/validators';
 import { useForm } from '../../shared/hooks/form-hook';
 
@@ -37,29 +38,64 @@ const DUMMY_PLACES = [
 
 const UpdatePlace = () => {
     const placeId = useParams().placeId;
+    const [isLoading, setIsLoading] = useState(true);
+
+    const [ formState, inputHandler, setFormData ] = useForm(
+        {
+            title: {
+                value: '',
+                isValid: false
+            },
+            description: {
+                value: '',
+                isValid: false
+            }
+        }, 
+        false);
+
     const placeFound = DUMMY_PLACES.find(p=> p.id === placeId);
     
-    const [ formState, inputHandler ] = useForm({
-        title: {
-            value: placeFound.title,
-            isValid: true
-        },
-        description: {
-            value: placeFound.description,
-            isValid: true
+    useEffect(()=>{
+        if(placeFound){
+            setFormData(
+                {
+                    title: {
+                        value: placeFound.title,
+                        isValid: true
+                    },
+                    description: {
+                        value: placeFound.description,
+                        isValid: true
+                    }
+                }, 
+                true
+            );
         }
-    }, true);
-
-    if(!placeFound){
-        return (
-        <div className="center">
-            <h2>Could not find place!</h2>
-        </div>);
-    }
+        
+        setIsLoading(false);
+    }, [setFormData, placeFound]) 
     
     const updateFormSubmitHandler = event => {
         event.preventDefault();
         console.log(formState);
+    }
+
+    if(!placeFound){
+        return (
+            <div className="center">
+                <Card>
+                    <h2>Could not find place!</h2>
+                </Card>
+            </div>
+        );
+    }
+
+    if(isLoading){
+        return (
+            <div className="center">
+                <h2>Loading...</h2>
+            </div>
+        );
     }
 
     return (
