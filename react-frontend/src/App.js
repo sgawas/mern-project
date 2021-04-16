@@ -6,6 +6,7 @@ import NewPlace from './places/pages/NewPlace';
 import UpdatePlace from './places/pages/UpdatePlace';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
 import UserPlaces from './places/pages/UserPlaces';
+import Auth from './user/pages/Auth';
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
       </Route>
       <Route path="/:userId/places" exact>
         <UserPlaces/>
+      </Route>
+      <Route path="/auth">
+        <Auth />
       </Route>
       <Redirect to="/" />
     </Switch>
