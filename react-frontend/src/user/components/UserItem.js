@@ -7,7 +7,7 @@ import Card from '../../shared/components/UIElements/Card/Card';
 import './UserItem.css';
 
 const UserItem = props => {
-    console.log(props)
+
     return (
         <li className="user-item">
             <Card className="user-item__content">
