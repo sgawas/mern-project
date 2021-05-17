@@ -32,7 +32,7 @@ const signUp = async (req, res, next)=> {
             email,
             name,
             password,
-            image: 'http://image.png',
+            image: 'https://live.staticflickr.com/7631/26849088292_36fc52ee90_b.jpg',
             places: []
         });
 
