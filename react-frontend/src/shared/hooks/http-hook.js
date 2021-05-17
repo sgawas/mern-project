@@ -47,5 +47,5 @@ export const useHttpClient = () => {
         activeHttpRequests.current.forEach(abortCntlr => abortCntlr.abort());
     }, []);
 
-    return { isLoading, error, sendRequest, clearError}
+    return { isLoading, error, sendRequest, clearError };
 }
