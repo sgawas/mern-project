@@ -48,8 +48,9 @@ const signUp = async (req, res, next)=> {
 const signIn = async (req, res, next)=> {
     
     const { email, password } = req.body;
+    let foundUser;
     try{
-        let foundUser = await User.findOne({email});
+        foundUser = await User.findOne({email});
         if(!foundUser || foundUser.password !== password){
             return next(new HttpError('Invalid email/password combination', 401));
         }
@@ -57,7 +58,7 @@ const signIn = async (req, res, next)=> {
         return next(new HttpError('Something went wrong, please sign in again.', 500));
     }
     
-    res.json({ message: 'logged in' });
+    res.json({ message: 'logged in', user: foundUser });
 }
 
 exports.getUsers = getUsers;
